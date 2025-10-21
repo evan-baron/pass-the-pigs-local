@@ -23,29 +23,33 @@ interface AppContextType {
 	gameStatus: 'not_started' | 'in_progress' | 'finished';
 	gameScore: {
 		player1: {
-			round1: number;
-			round2: number;
-			round3: number;
-			round4: number;
-			round5: number;
-			round6: number;
-			round7: number;
-			round8: number;
-			round9: number;
-			round10: number;
+			rounds: {
+				round1: number | null;
+				round2: number | null;
+				round3: number | null;
+				round4: number | null;
+				round5: number | null;
+				round6: number | null;
+				round7: number | null;
+				round8: number | null;
+				round9: number | null;
+				round10: number | null;
+			};
 			total: number;
 		};
 		player2: {
-			round1: number;
-			round2: number;
-			round3: number;
-			round4: number;
-			round5: number;
-			round6: number;
-			round7: number;
-			round8: number;
-			round9: number;
-			round10: number;
+			rounds: {
+				round1: number | null;
+				round2: number | null;
+				round3: number | null;
+				round4: number | null;
+				round5: number | null;
+				round6: number | null;
+				round7: number | null;
+				round8: number | null;
+				round9: number | null;
+				round10: number | null;
+			};
 			total: number;
 		};
 	};
@@ -54,6 +58,10 @@ interface AppContextType {
 		player1: string;
 		player2: string;
 	};
+	setGameStatus: (status: 'not_started' | 'in_progress' | 'finished') => void;
+	setGameScore: (score: AppContextType['gameScore']) => void;
+	setGameType: (type: 'solo' | 'computer' | 'multiplayer') => void;
+	setPlayers: (players: { player1: string; player2: string }) => void;
 }
 
 // Create Context
@@ -119,36 +127,40 @@ export const ContextProvider = ({ children }: ContextProviderProps) => {
 		useState<AppContextType['gameStatus']>('not_started');
 	const [gameScore, setGameScore] = useState<AppContextType['gameScore']>({
 		player1: {
-			round1: 0,
-			round2: 0,
-			round3: 0,
-			round4: 0,
-			round5: 0,
-			round6: 0,
-			round7: 0,
-			round8: 0,
-			round9: 0,
-			round10: 0,
+			rounds: {
+				round1: null,
+				round2: null,
+				round3: null,
+				round4: null,
+				round5: null,
+				round6: null,
+				round7: null,
+				round8: null,
+				round9: null,
+				round10: null,
+			},
 			total: 0,
 		},
 		player2: {
-			round1: 0,
-			round2: 0,
-			round3: 0,
-			round4: 0,
-			round5: 0,
-			round6: 0,
-			round7: 0,
-			round8: 0,
-			round9: 0,
-			round10: 0,
+			rounds: {
+				round1: null,
+				round2: null,
+				round3: null,
+				round4: null,
+				round5: null,
+				round6: null,
+				round7: null,
+				round8: null,
+				round9: null,
+				round10: null,
+			},
 			total: 0,
 		},
 	});
 	const [gameType, setGameType] = useState<AppContextType['gameType']>('solo');
 	const [players, setPlayers] = useState<AppContextType['players']>({
-		player1: 'Player 1',
-		player2: 'Player 2',
+		player1: '',
+		player2: '',
 	});
 
 	return (
@@ -164,6 +176,10 @@ export const ContextProvider = ({ children }: ContextProviderProps) => {
 				gameScore,
 				gameType,
 				players,
+				setGameStatus,
+				setGameScore,
+				setGameType,
+				setPlayers,
 			}}
 		>
 			{children}

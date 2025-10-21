@@ -1,0 +1,23 @@
+.players-wrapper {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+
+	.input-group {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+		font-size: 1.5rem;
+		width: 100%;
+
+		input {
+			font-size: 1.25rem;
+			padding: 0.25rem;
+			color: black;
+		}
+	}
+}

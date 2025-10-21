@@ -18,7 +18,7 @@ export default function Home() {
 	return (
 		<div className={styles.page}>
 			<h1>Pass the Pigs</h1>
-			<Link href='/players'>
+			<Link href='/play'>
 				<button>New Game</button>
 			</Link>
 			<Link href='/game'>
