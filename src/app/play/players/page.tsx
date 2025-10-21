@@ -21,13 +21,17 @@ const Players = () => {
 	const { players, setPlayers } = useAppContext();
 
 	const insertDefaultNames = () => {
+		const updatedPlayers = { ...players };
+
 		(Object.keys(players) as Array<keyof typeof players>).forEach(
 			(key, index) => {
 				if (!players[key]) {
-					setPlayers({ ...players, [key]: `Player ${index + 1}` });
+					updatedPlayers[key] = `Player ${index + 1}`;
 				}
 			}
 		);
+
+		setPlayers(updatedPlayers);
 	};
 
 	return (
@@ -57,6 +61,9 @@ const Players = () => {
 			</div>
 			<Link href='/game'>
 				<button onClick={insertDefaultNames}>Start Game</button>
+			</Link>
+			<Link href='/play'>
+				<button>Back</button>
 			</Link>
 		</div>
 	);

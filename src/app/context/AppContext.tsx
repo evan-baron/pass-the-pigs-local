@@ -58,10 +58,13 @@ interface AppContextType {
 		player1: string;
 		player2: string;
 	};
+	currentPlayer: 'player1' | 'player2';
 	setGameStatus: (status: 'not_started' | 'in_progress' | 'finished') => void;
 	setGameScore: (score: AppContextType['gameScore']) => void;
 	setGameType: (type: 'solo' | 'computer' | 'multiplayer') => void;
 	setPlayers: (players: { player1: string; player2: string }) => void;
+	setCurrentPlayer: (player: 'player1' | 'player2') => void;
+	switchCurrentPlayer: () => void;
 }
 
 // Create Context
@@ -162,6 +165,14 @@ export const ContextProvider = ({ children }: ContextProviderProps) => {
 		player1: '',
 		player2: '',
 	});
+	const [currentPlayer, setCurrentPlayer] = useState<'player1' | 'player2'>(
+		'player1'
+	);
+
+	// Function to switch to the other player
+	const switchCurrentPlayer = () => {
+		setCurrentPlayer((prev) => (prev === 'player1' ? 'player2' : 'player1'));
+	};
 
 	return (
 		<AppContext.Provider
@@ -176,10 +187,13 @@ export const ContextProvider = ({ children }: ContextProviderProps) => {
 				gameScore,
 				gameType,
 				players,
+				currentPlayer,
 				setGameStatus,
 				setGameScore,
 				setGameType,
 				setPlayers,
+				setCurrentPlayer,
+				switchCurrentPlayer,
 			}}
 		>
 			{children}

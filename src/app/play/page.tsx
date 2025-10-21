@@ -27,6 +27,9 @@ const Players = () => {
 			<Link href='/game'>
 				<button>Play Solo</button>
 			</Link>
+			<Link href='/'>
+				<button>Back to Home</button>
+			</Link>
 		</div>
 	);
 };
