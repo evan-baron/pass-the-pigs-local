@@ -40,6 +40,10 @@ h2 {
 	font-size: 3rem;
 }
 
+h3 {
+	font-size: 2rem;
+}
+
 button {
 	cursor: pointer;
 	border: 3px solid white;
