@@ -20,6 +20,40 @@ interface AppContextType {
 	isSmallTablet: boolean | undefined;
 	isTablet: boolean | undefined;
 	isTabletWidth: boolean | undefined;
+	gameStatus: 'not_started' | 'in_progress' | 'finished';
+	gameScore: {
+		player1: {
+			round1: number;
+			round2: number;
+			round3: number;
+			round4: number;
+			round5: number;
+			round6: number;
+			round7: number;
+			round8: number;
+			round9: number;
+			round10: number;
+			total: number;
+		};
+		player2: {
+			round1: number;
+			round2: number;
+			round3: number;
+			round4: number;
+			round5: number;
+			round6: number;
+			round7: number;
+			round8: number;
+			round9: number;
+			round10: number;
+			total: number;
+		};
+	};
+	gameType: 'solo' | 'computer' | 'multiplayer';
+	players: {
+		player1: string;
+		player2: string;
+	};
 }
 
 // Create Context
@@ -80,6 +114,43 @@ export const ContextProvider = ({ children }: ContextProviderProps) => {
 	const isSmallTablet = hydrated ? rawSmallTablet : undefined;
 	const isTablet = isTabletWidth || isTabletHeight;
 
+	// Game status and score states
+	const [gameStatus, setGameStatus] =
+		useState<AppContextType['gameStatus']>('not_started');
+	const [gameScore, setGameScore] = useState<AppContextType['gameScore']>({
+		player1: {
+			round1: 0,
+			round2: 0,
+			round3: 0,
+			round4: 0,
+			round5: 0,
+			round6: 0,
+			round7: 0,
+			round8: 0,
+			round9: 0,
+			round10: 0,
+			total: 0,
+		},
+		player2: {
+			round1: 0,
+			round2: 0,
+			round3: 0,
+			round4: 0,
+			round5: 0,
+			round6: 0,
+			round7: 0,
+			round8: 0,
+			round9: 0,
+			round10: 0,
+			total: 0,
+		},
+	});
+	const [gameType, setGameType] = useState<AppContextType['gameType']>('solo');
+	const [players, setPlayers] = useState<AppContextType['players']>({
+		player1: 'Player 1',
+		player2: 'Player 2',
+	});
+
 	return (
 		<AppContext.Provider
 			value={{
@@ -89,6 +160,10 @@ export const ContextProvider = ({ children }: ContextProviderProps) => {
 				isTablet,
 				isTabletWidth,
 				isSmallTablet,
+				gameStatus,
+				gameScore,
+				gameType,
+				players,
 			}}
 		>
 			{children}
